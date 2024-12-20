@@ -1,5 +1,7 @@
 package dev.openfga.autoconfigure;
 
+import java.time.Duration;
+import java.util.Map;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -28,6 +30,41 @@ public class OpenFgaProperties implements InitializingBean {
      * The credentials for the OpenFGA client.
      */
     private Credentials credentials;
+
+    /**
+     * The HTTP user agent header to use for requests, default openfga-sdk java/{version}
+     */
+    private String userAgent;
+
+    /**
+     * The read timeout for requests, default 10 seconds
+     */
+    private Duration readTimeout;
+
+    /**
+     * The connect timeout for requests, default 10 seconds
+     */
+    private Duration connectTimeout;
+
+    /**
+     * The maximum number of retries to attempt.
+     */
+    private Integer maxRetries;
+
+    /**
+     * The maximum delay between retries.
+     */
+    private Duration minimumRetryDelay;
+
+    /**
+     * The default headers to use for requests.
+     */
+    private Map<String, String> defaultHeaders;
+
+    /**
+     * The telemetry configuration for the client. See {@link dev.openfga.sdk.telemetry.TelemetryMetric} and {@link dev.openfga.sdk.telemetry.TelemetryAttribute} as well as <a href="https://openfga.dev/docs/getting-started/configure-telemetry">Configure SDK Client Telemetry</a>
+     */
+    private Map<TelemetryMetric, Map<TelemetryAttribute, Object>> telemetryConfiguration;
 
     public String getApiUrl() {
         return apiUrl;
@@ -61,8 +98,65 @@ public class OpenFgaProperties implements InitializingBean {
         this.credentials = credentials;
     }
 
+    public String getUserAgent() {
+        return userAgent;
+    }
+
+    public void setUserAgent(String userAgent) {
+        this.userAgent = userAgent;
+    }
+
+    public Duration getReadTimeout() {
+        return readTimeout;
+    }
+
+    public void setReadTimeout(Duration readTimeout) {
+        this.readTimeout = readTimeout;
+    }
+
+    public Duration getConnectTimeout() {
+        return connectTimeout;
+    }
+
+    public void setConnectTimeout(Duration connectTimeout) {
+        this.connectTimeout = connectTimeout;
+    }
+
+    public int getMaxRetries() {
+        return maxRetries;
+    }
+
+    public void setMaxRetries(Integer maxRetries) {
+        this.maxRetries = maxRetries;
+    }
+
+    public Duration getMinimumRetryDelay() {
+        return minimumRetryDelay;
+    }
+
+    public void setMinimumRetryDelay(Duration minimumRetryDelay) {
+        this.minimumRetryDelay = minimumRetryDelay;
+    }
+
+    public Map<String, String> getDefaultHeaders() {
+        return defaultHeaders;
+    }
+
+    public void setDefaultHeaders(Map<String, String> defaultHeaders) {
+        this.defaultHeaders = defaultHeaders;
+    }
+
+    public Map<TelemetryMetric, Map<TelemetryAttribute, Object>> getTelemetryConfiguration() {
+        return telemetryConfiguration;
+    }
+
+    public void setTelemetryConfiguration(
+            Map<TelemetryMetric, Map<TelemetryAttribute, Object>> telemetryConfiguration) {
+        this.telemetryConfiguration = telemetryConfiguration;
+    }
+
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         validate();
     }
 

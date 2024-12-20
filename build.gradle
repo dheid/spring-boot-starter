@@ -69,6 +69,10 @@ spotless {
         removeUnusedImports()
         importOrder()
     }
+    flexmark {
+        target "*.md"
+        flexmark()
+    }
 }
 
 test {
