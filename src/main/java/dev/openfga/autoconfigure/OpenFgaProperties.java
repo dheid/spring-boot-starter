@@ -1,5 +1,7 @@
 package dev.openfga.autoconfigure;
 
+import java.time.Duration;
+import java.util.Map;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -29,40 +31,265 @@ public class OpenFgaProperties implements InitializingBean {
      */
     private Credentials credentials;
 
+    /**
+     * The HTTP user agent header to use for requests, default openfga-sdk java/{version}
+     */
+    private String userAgent;
+
+    /**
+     * The read timeout for requests, default 10 seconds
+     */
+    private Duration readTimeout;
+
+    /**
+     * The connect timeout for requests, default 10 seconds
+     */
+    private Duration connectTimeout;
+
+    /**
+     * The maximum number of retries to attempt.
+     */
+    private Integer maxRetries;
+
+    /**
+     * The maximum delay between retries.
+     */
+    private Duration minimumRetryDelay;
+
+    /**
+     * The HTTP version to use for requests.
+     */
+    private HttpVersion httpVersion;
+
+    /**
+     * The default headers to use for requests.
+     */
+    private Map<String, String> defaultHeaders;
+
+    /**
+     * The telemetry configuration for the client. See {@link TelemetryMetric} and {@link TelemetryAttribute} as well as <a href="https://openfga.dev/docs/getting-started/configure-telemetry">Configure SDK Client Telemetry</a>
+     */
+    private Map<TelemetryMetric, Map<TelemetryAttribute, Object>> telemetryConfiguration;
+
+    /**
+     * Gets the URL to the OpenFGA instance.
+     *
+     * @return the API URL
+     */
     public String getApiUrl() {
         return apiUrl;
     }
 
+    /**
+     * Sets the URL to the OpenFGA instance.
+     *
+     * @param apiUrl the API URL to set
+     */
     public void setApiUrl(String apiUrl) {
         this.apiUrl = apiUrl;
     }
 
+    /**
+     * Gets the ID of the store to use.
+     *
+     * @return the store ID
+     */
     public String getStoreId() {
         return storeId;
     }
 
+    /**
+     * Sets the ID of the store to use.
+     *
+     * @param storeId the store ID to set
+     */
     public void setStoreId(String storeId) {
         this.storeId = storeId;
     }
 
+    /**
+     * Gets the ID of the authorization model to use.
+     *
+     * @return the authorization model ID
+     */
     public String getAuthorizationModelId() {
         return authorizationModelId;
     }
 
+    /**
+     * Sets the ID of the authorization model to use.
+     *
+     * @param authorizationModelId the authorization model ID to set
+     */
     public void setAuthorizationModelId(String authorizationModelId) {
         this.authorizationModelId = authorizationModelId;
     }
 
+    /**
+     * Gets the credentials for the OpenFGA client.
+     *
+     * @return the credentials
+     */
     public Credentials getCredentials() {
         return credentials;
     }
 
+    /**
+     * Sets the credentials for the OpenFGA client.
+     *
+     * @param credentials the credentials to set
+     */
     public void setCredentials(Credentials credentials) {
         this.credentials = credentials;
     }
 
+    /**
+     * Gets the HTTP user agent header to use for requests.
+     *
+     * @return the user agent
+     */
+    public String getUserAgent() {
+        return userAgent;
+    }
+
+    /**
+     * Sets the HTTP user agent header to use for requests.
+     *
+     * @param userAgent the user agent to set
+     */
+    public void setUserAgent(String userAgent) {
+        this.userAgent = userAgent;
+    }
+
+    /**
+     * Gets the read timeout for requests.
+     *
+     * @return the read timeout
+     */
+    public Duration getReadTimeout() {
+        return readTimeout;
+    }
+
+    /**
+     * Sets the read timeout for requests.
+     *
+     * @param readTimeout the read timeout to set
+     */
+    public void setReadTimeout(Duration readTimeout) {
+        this.readTimeout = readTimeout;
+    }
+
+    /**
+     * Gets the connect timeout for requests.
+     *
+     * @return the connect timeout
+     */
+    public Duration getConnectTimeout() {
+        return connectTimeout;
+    }
+
+    /**
+     * Sets the connect timeout for requests.
+     *
+     * @param connectTimeout the connect timeout to set
+     */
+    public void setConnectTimeout(Duration connectTimeout) {
+        this.connectTimeout = connectTimeout;
+    }
+
+    /**
+     * Gets the maximum number of retries to attempt.
+     *
+     * @return the maximum number of retries
+     */
+    public int getMaxRetries() {
+        return maxRetries;
+    }
+
+    /**
+     * Sets the maximum number of retries to attempt.
+     *
+     * @param maxRetries the maximum number of retries to set
+     */
+    public void setMaxRetries(Integer maxRetries) {
+        this.maxRetries = maxRetries;
+    }
+
+    /**
+     * Gets the maximum delay between retries.
+     *
+     * @return the minimum retry delay
+     */
+    public Duration getMinimumRetryDelay() {
+        return minimumRetryDelay;
+    }
+
+    /**
+     * Sets the maximum delay between retries.
+     *
+     * @param minimumRetryDelay the minimum retry delay to set
+     */
+    public void setMinimumRetryDelay(Duration minimumRetryDelay) {
+        this.minimumRetryDelay = minimumRetryDelay;
+    }
+
+    /**
+     * Gets the HTTP version to use for requests.
+     *
+     * @return the HTTP version
+     */
+    public HttpVersion getHttpVersion() {
+        return httpVersion;
+    }
+
+    /**
+     * Sets the HTTP version to use for requests.
+     *
+     * @param httpVersion the HTTP version to set
+     */
+    public void setHttpVersion(HttpVersion httpVersion) {
+        this.httpVersion = httpVersion;
+    }
+
+    /**
+     * Gets the default headers to use for requests.
+     *
+     * @return the default headers
+     */
+    public Map<String, String> getDefaultHeaders() {
+        return defaultHeaders;
+    }
+
+    /**
+     * Sets the default headers to use for requests.
+     *
+     * @param defaultHeaders the default headers to set
+     */
+    public void setDefaultHeaders(Map<String, String> defaultHeaders) {
+        this.defaultHeaders = defaultHeaders;
+    }
+
+    /**
+     * Gets the telemetry configuration for the client.
+     *
+     * @return the telemetry configuration
+     */
+    public Map<TelemetryMetric, Map<TelemetryAttribute, Object>> getTelemetryConfiguration() {
+        return telemetryConfiguration;
+    }
+
+    /**
+     * Sets the telemetry configuration for the client.
+     *
+     * @param telemetryConfiguration the telemetry configuration to set
+     */
+    public void setTelemetryConfiguration(
+            Map<TelemetryMetric, Map<TelemetryAttribute, Object>> telemetryConfiguration) {
+        this.telemetryConfiguration = telemetryConfiguration;
+    }
+
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         validate();
     }
 
